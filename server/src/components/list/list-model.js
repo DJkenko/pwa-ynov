@@ -7,9 +7,8 @@ const listSchema = new Schema({
     type: String,
     required: true
   },
-  favorite: {
-    type: Boolean,
-    default: false
+  description: {
+    type: String,
   }
 }, {
   timestamps: true

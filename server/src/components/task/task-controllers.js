@@ -21,6 +21,7 @@ export async function id (ctx) {
 }
 
 export async function create (ctx) {
+  console.log(ctx.request.body);
   try {
     const TaskValidationSchema = Joi.object({
       title: Joi.string().required(),
@@ -38,10 +39,11 @@ export async function create (ctx) {
 
 export async function update (ctx) {
   try {
+    console.log(ctx.request.body);
     const TaskValidationSchema = Joi.object({
-      title: Joi.string().required(),
+      title: Joi.string(),
       description: Joi.string(),
-      list: Joi.string().required(),
+      list: Joi.string(),
       done: Joi.boolean()
     })
     const { error, value } = TaskValidationSchema.validate(ctx.request.body)

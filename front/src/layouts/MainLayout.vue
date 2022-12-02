@@ -1,21 +1,19 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+    <q-header elevated class="app-header">
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
-
-        <q-toolbar-title>
-          Quasar App
+        <q-toolbar-title class="title">
+          Dashboard
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <q-avatar
+          v-for="size in ['xl']"
+          :key="size"
+          :size="size"
+          color="purple"
+          text-color="white"
+          icon="person"
+    />
       </q-toolbar>
     </q-header>
 
@@ -42,14 +40,80 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+
+    <q-footer class="app-footer q-py-sm">
+      <div class="flex justify-between">
+        <q-btn
+          icon="sort"
+          flat
+          text-color="grey-6"
+          @click="() =>emit('toggleDrawer')"
+        />
+        <q-btn
+          icon="add"
+          round
+          unelaveted
+          text-color="white"
+          color="purple"
+          @click="newListCard = true"
+        />
+        <q-btn
+          icon="person"
+          flat
+          text-color="grey-6"
+          @click="() =>emit('toggleDrawer')"
+        />
+      </div>
+
+    </q-footer>
+    <q-dialog v-model="newListCard">
+        <q-card>
+          <q-card-section>
+            <div class="text-h6" align="center">Créer une nouvelle liste</div>
+          </q-card-section>
+
+          <q-card-section class="q-pt-none">
+            <q-input filled v-model="listName" label="Nom de la liste" placeholder="Ex: Courses" />
+          </q-card-section>
+
+          <q-card-actions align="center">
+            <q-btn flat label="Annuler" color="primary" v-close-popup />
+            <q-btn
+              unelevated label="Créer" color="primary" v-close-popup
+              @click="ListStore.handleCreateList(listName)"/>
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
   </q-layout>
 </template>
+<style scoped>
+.title{
+  color: black;
+}
+.app-header{
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px -2px 10px rgba(0,0,0,1);
+}
+.app-footer{
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px -2px 10px rgba(0,0,0,1);
+}
+</style>
 
-<script>
-import { defineComponent, ref } from 'vue'
+<script setup>
+import { ref } from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
+import { useListStore } from 'src/stores/list-store'
+import { useTaskStore } from 'src/stores/task-store'
 
-const linksList = [
+const ListStore = useListStore()
+const TaskStore = useTaskStore()
+ListStore.loadAllList()
+TaskStore.loadAllTask()
+
+const newListCard = ref(false)
+
+/* const linksList = [
   {
     title: 'Docs',
     caption: 'quasar.dev',
@@ -92,9 +156,9 @@ const linksList = [
     icon: 'favorite',
     link: 'https://awesome.quasar.dev'
   }
-]
+] */
 
-export default defineComponent({
+/* export default defineComponent({
   name: 'MainLayout',
 
   components: {
@@ -112,5 +176,5 @@ export default defineComponent({
       }
     }
   }
-})
+}) */
 </script>
