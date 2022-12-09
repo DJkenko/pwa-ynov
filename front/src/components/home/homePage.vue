@@ -1,6 +1,6 @@
 <template>
   <div class="q-pa-xl">
-    <h4>Bonjour, Tom Dupont ! 👋</h4>
+    <h5>Bonjour, Tom Dupont ! 👋</h5>
   </div>
 
   <div>
