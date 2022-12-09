@@ -1,4 +1,5 @@
 <template>
+    <q-btn @click="router.go(-1)">◀️</q-btn>
     <div class="q-pa-xl">
         <p>Task</p>
         <h4>
@@ -16,10 +17,11 @@
 </template>
 <script setup>
 import { ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { getTasksById } from 'src/services/tasks.js'
 
 const route = useRoute() // permet d'accéder au paramètre de la route actuelle route.query, route.params... etc
+const router = useRouter() // Permet de d'accéder aux méthodes de redirection router.push, router.go, router.replace etc...
 const params = route.params.id
 
 // eslint-disable-next-line func-call-spacing

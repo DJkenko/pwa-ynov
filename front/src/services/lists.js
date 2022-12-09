@@ -9,5 +9,5 @@ export function createNewList (titleList) {
 }
 
 export function getListById (id) {
-  return api.get(`/list/${id}`)
+  return api.get(`/lists/${id}`)
 }

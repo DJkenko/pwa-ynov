@@ -12,8 +12,8 @@
           <q-card-section class="q-pt-none">
             <q-input filled v-model="description" label="Description de la tâche" placeholder="Ex: Ceci est une description" />
           </q-card-section>
-          <q-card-section>
-              <q-select standout v-model="model" :options="allList" label="List Attribution" />
+          <q-card-section class="q-pt-none">
+            <q-input filled v-model="listId" label="list Id" placeholder="Ex: 24243DRT646G67" />
           </q-card-section>
 
           <q-card-actions align="center">
@@ -27,13 +27,20 @@
 </template>
 <script>
 
+import { computed } from 'vue'
 import { useTaskStore } from 'src/stores/task-store'
 import { useListStore } from 'src/stores/list-store'
 
 const ListStore = useListStore()
+let listTask = []
 
-// eslint-disable-next-line no-undef, no-unused-vars
+// eslint-disable-next-line no-undef
 const allList = computed(() => ListStore.lists)
+
+allList.value.map(element => {
+  // eslint-disable-next-line no-return-assign
+  return listTask += element
+})
 
 // eslint-disable-next-line no-unused-vars
 const TaskStore = useTaskStore()
