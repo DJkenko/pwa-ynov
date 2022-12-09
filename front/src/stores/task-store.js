@@ -20,10 +20,10 @@ export const useTaskStore = defineStore('task', {
       }
     },
 
-    async handleCreateTaskbyList (taskTitle, listId) {
+    async handleCreateTaskbyList (taskTitle, descriptionTask, listId) {
       try {
         console.log('Creating new list...')
-        await createTaskbyList(taskTitle, listId)
+        await createTaskbyList(taskTitle, descriptionTask, listId)
         this.loadAllTask()
       } catch (error) {
         throw new Error(error)

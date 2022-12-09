@@ -8,10 +8,10 @@ export function getTasksById (taskId) {
   return api.get(`/tasks/${taskId}`)
 }
 
-export function createTaskbyList (titleTask, listTaskId) {
+export function createTaskbyList (titleTask, descriptionTask, listTaskId) {
   return api.post('/tasks', {
     title: titleTask,
-    description: 'ceci est une description de task',
+    description: descriptionTask,
     list: listTaskId
   })
 }
