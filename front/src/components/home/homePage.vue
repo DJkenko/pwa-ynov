@@ -6,7 +6,8 @@
   <div>
     <q-card-section v-for="(list, index) in allList" :key="index">
       <q-expansion-item class="shadow-1 overflow-hidden" style="border-radius: 10px" v-bind:label="list.title"
-        header-class="bg-grey text-white">
+      header-class="bg-grey text-white">
+      <q-icon name="close" @click="router.push(`task/${list._id}`)" class="cursor-pointer" />
         <q-card class="q-card-task">
           <ul v-for="(task, index) in allTasks" :key="index">
             <div class="div-task" v-if="isTaskInList(task.list, list._id)">
@@ -47,6 +48,9 @@ import { computed } from 'vue'
 import { changeStatus } from 'src/services/tasks.js'
 import { useListStore } from 'src/stores/list-store'
 import { useTaskStore } from 'src/stores/task-store'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const ListStore = useListStore()
 const TaskStore = useTaskStore()
