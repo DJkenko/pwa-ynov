@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { Notify } from 'quasar'
-import { getAllTasks, createTaskbyList, deleteTask } from 'src/services/tasks'
+import { getAllTasks, getTasksById, createTaskbyList, deleteTask } from 'src/services/tasks'
 
 export const useTaskStore = defineStore('task', {
   state: () => ({
@@ -35,6 +35,15 @@ export const useTaskStore = defineStore('task', {
         console.log('Creating new list...')
         await deleteTask(taskId)
         this.loadAllTask()
+      } catch (error) {
+        throw new Error(error)
+      }
+    },
+
+    async handleGetTaskbyId (taskId) {
+      try {
+        console.log('get task...')
+        await getTasksById(taskId)
       } catch (error) {
         throw new Error(error)
       }

@@ -28,9 +28,9 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('components/actionTask/listTask.vue') },
-      { path: 'vueTask/{:id}', component: () => import('components/actionTask/vueTask.vue') }
-      /* { path: 'createTask', component: () => import('components/actionTask/createTask.vue') },
-      { path: 'updateTask', component: () => import('components/actionTask/updateTask.vue') } */
+      { path: ':id', component: () => import('components/actionTask/vueTask.vue') },
+      { path: 'createTask', component: () => import('components/actionTask/createTask.vue') }
+      /* { path: 'updateTask', component: () => import('components/actionTask/updateTask.vue') } */
     ]
   },
   {

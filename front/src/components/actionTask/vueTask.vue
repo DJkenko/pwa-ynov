@@ -1,8 +1,33 @@
 <template>
-    {{params}}
+    <div class="q-pa-xl">
+        <p>Task</p>
+        <h4>
+            {{ task.title }}
+        </h4>
+        <p>Description</p>
+        <p>
+            {{ task.description }}
+        </p>
+        <p>Terminée !</p>
+        <p v-if="(task.done == false)">
+            {{ task.done == false ? 'non' : 'oui' }}
+        </p>
+    </div>
 </template>
 <script setup>
+import { ref } from 'vue'
 import { useRoute } from 'vue-router'
+import { getTasksById } from 'src/services/tasks.js'
+
 const route = useRoute() // permet d'accéder au paramètre de la route actuelle route.query, route.params... etc
-const params = route.query
+const params = route.params.id
+
+// eslint-disable-next-line func-call-spacing
+const task = ref();
+
+// eslint-disable-next-line no-unexpected-multiline
+(async () => {
+  const { data: taskElement } = await getTasksById(params)
+  task.value = taskElement
+})()
 </script>

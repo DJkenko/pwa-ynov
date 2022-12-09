@@ -4,6 +4,10 @@ export function getAllTasks () {
   return api.get('/tasks')
 }
 
+export function getTasksById (taskId) {
+  return api.get(`/tasks/${taskId}`)
+}
+
 export function createTaskbyList (titleTask, listTaskId) {
   return api.post('/tasks', {
     title: titleTask,
