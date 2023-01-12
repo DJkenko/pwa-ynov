@@ -1,11 +1,14 @@
 <template>
-  <router-view />
+  <router-view :key="$route.fullPath" />
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script setup lang="ts">
+import { onBeforeMount } from 'vue';
+import { useTodosStore } from './stores/todos';
 
-export default defineComponent({
-  name: 'App'
-})
+const todosStore = useTodosStore();
+
+onBeforeMount(async () => {
+  await todosStore.fetchTodos();
+});
 </script>
